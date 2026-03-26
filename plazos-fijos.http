@@ -1,0 +1,40 @@
+###
+## Prueba para obtener todos los Plazos Fijos
+GET http://localhost:3000/api/plazos-fijos
+
+###
+## Prueba para agregar un Plazo Fijo
+POST http://localhost:3000/api/plazos-fijos
+Content-Type: application/json
+
+{
+  "numeroCuenta": "123456789",
+  "tipoMoneda": "ARS",
+  "monto": "100000.00",
+  "tasaAnual": "85.50",
+  "fechaInicio": "2024-05-01",
+  "fechaVencimiento": "2024-06-01"
+}
+
+###
+## Prueba para obtener un Plazo Fijo por ID
+GET http://localhost:3000/api/plazos-fijos/1
+
+###
+## Prueba para actualizar un Plazo Fijo por ID (PUT completo)
+PUT http://localhost:3000/api/plazos-fijos/2
+Content-Type: application/json
+
+{
+  "numeroCuenta": "1234567-89",
+  "tipoMoneda": "ARS",
+  "monto": "150000.00",
+  "tasaAnual": "90.00",
+  "fechaInicio": "2024-05-01",
+  "fechaVencimiento": "2024-08-01",
+  "estado": "VENCIDO"
+}
+
+###
+## Prueba para eliminar un Plazo Fijo por ID
+DELETE http://localhost:3000/api/plazos-fijos/1

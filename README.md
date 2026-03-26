@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ejercicio 4: API de Plazo Fijo
 
-## Getting Started
+## Requisitos funcionales
 
-First, run the development server:
+### 1. Gestión de Plazos Fijos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+La API debe permitir:
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/api/plazos-fijos` | Crear un plazo fijo |
+| GET | `/api/plazos-fijos` | Listar todos los plazos fijos |
+| GET | `/api/plazos-fijos/{id}` | Obtener un plazo fijo por ID |
+| PUT | `/api/plazos-fijos/{id}` | Actualizar un plazo fijo |
+| DELETE | `/api/plazos-fijos/{id}` | Eliminar un plazo fijo |
+
+### 2. Modelo de Plazo Fijo
+
+```json
+{
+  "id": 1,
+  "numeroCuenta": "386-00123-45678",
+  "tipoMoneda": "ARS",
+  "monto": 100000.00,
+  "tasaAnual": 85.50,
+  "fechaInicio": "2024-01-15",
+  "fechaVencimiento": "2024-04-15",
+  "plazoDias": 90,
+  "interesCalculado": 21041.10,
+  "montoFinal": 121041.10,
+  "estado": "ACTIVO"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Cálculo de Interés
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La API debe calcular automáticamente:
+- **Interés = Monto × (Tasa Anual / 365) × Días**
+- **Monto Final = Monto + Interés**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Ejemplo:**
+```
+Monto: $100.000
+Tasa Anual: 85.50%
+Días: 90
 
-## Learn More
+Interés = 100.000 × (85.50 / 365) × 90 = 21.041,10
+Monto Final = 121.041,10
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Estados del Plazo Fijo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Estado | Descripción |
+|--------|-------------|
+| ACTIVO | Vigente, aún no venció |
+| VENCIDO | Ya pasó la fecha de vencimiento |
+| CANCELADO | El cliente lo canceló anticipadamente |
+| RENOVADO | Se renovó al vencimiento |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Requisitos técnicos
 
-## Deploy on Vercel
+- **Base de datos**: SQL Server, PostgreSQL o MySQL (el postulante elige)
+- **API REST**: JSON
+- **Autenticación**: No requerida para este ejercicio
+- **Validaciones**:
+  - El monto debe ser mayor a 0
+  - La tasa anual debe estar entre 1% y 200%
+  - La fecha de vencimiento debe ser posterior a la fecha de inicio
+  - El plazo en días no puede exceder 365 días
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Entregables obligatorios
+
+1. **Código fuente completo** de la aplicación
+2. **Script de base de datos** (CREATE TABLE, INSERT de prueba)
+3. **Documentación de la API** (endpoints, request/response, códigos de error)
+4. **Guía de instalación** paso a paso
+5. **Manual de usuario** que explique cómo usar el sistema
+6. **Docker** generar todo lo necesario para desplegar mediante contenedores Docker (Dockerfile, docker-compose.yml, etc)
