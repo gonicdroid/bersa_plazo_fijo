@@ -36,14 +36,19 @@ function formatGetPlazoFijo(data: plazoFijoDBQuery){
   const interesCalc = calcularInteres(data.monto, data.tasaAnual, plazoDiasCalc);
   const montoFinalCalc = calcularMontoFinal(data.monto, interesCalc);
   
+  const formatYMD = (d: any) => {
+    const date = new Date(d);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  };
+
   return {
     "id": data.id,
     "numeroCuenta": data.idCuenta,
     "tipoMoneda": data.tipoMoneda,
     "monto": data.monto,
     "tasaAnual": data.tasaAnual,
-    "fechaInicio": data.fechaInicio,
-    "fechaVencimiento": data.fechaVencimiento,
+    "fechaInicio": formatYMD(data.fechaInicio),
+    "fechaVencimiento": formatYMD(data.fechaVencimiento),
     "plazoDias": plazoDiasCalc,
     "interesCalculado": interesCalc,
     "montoFinal": montoFinalCalc,

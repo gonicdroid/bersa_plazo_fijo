@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: BERSA
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: Bersa2026
+      MARIADB_DATABASE: BERSA
+      MARIADB_USER: mariadb
+      MARIADB_PASSWORD: Bersa2026
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+  app:
+    build: .
+    container_name: plazos_fijos_bd
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=mariadb
+      - DB_PASSWORD=Bersa2026
+      - DB_NAME=BERSA
+      - DB_PORT=3306
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:

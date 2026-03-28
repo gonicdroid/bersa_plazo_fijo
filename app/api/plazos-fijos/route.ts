@@ -4,7 +4,7 @@ import { getPlazosFijos, addPlazoFijo } from '@/lib/plazoFijo';
 import { ValidationError } from '@/lib/errors';
 import type { addPlazoFijoDTO } from '@/lib/types.d.ts';
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) { 
+export async function GET(req: NextRequest) { 
   try {
     const rows = await getPlazosFijos();
     if(!rows) {
