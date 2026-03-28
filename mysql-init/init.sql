@@ -25,8 +25,6 @@ CREATE TABLE plazosFijos (
     tasaAnual DECIMAL(5, 2) NOT NULL,
     fechaInicio DATE NOT NULL,
     fechaVencimiento DATE NOT NULL,
---    interesCalculado DECIMAL(18, 2) NOT NULL,
---    montoFinal DECIMAL(18, 2) NOT NULL,
     idEstado INTEGER NOT NULL,
     FOREIGN KEY (idEstado) REFERENCES estadosPlazoFijo(idEstado),
     FOREIGN KEY (idCuenta) REFERENCES cuentas(idCuenta)

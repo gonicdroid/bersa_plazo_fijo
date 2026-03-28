@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ejercicio 4- Plazo Fijo - Bersa",
+  title: "Ejercicio 4: API Plazo Fijo - Bersa",
   description: "Postulante: Gotte, Brian N.",
 };
 

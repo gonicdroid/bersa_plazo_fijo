@@ -36,6 +36,9 @@ export default function Home() {
   const [putBody, setPutBody] = useState(defaultPutJson);
   const [putResult, setPutResult] = useState<any>(null);
 
+  const [deletePlazoId, setDeletePlazoId] = useState<string>('');
+  const [deleteResult, setDeleteResult] = useState<any>(null);
+
   const handleGetPlazos = async () => {
     try {
       const res = await fetch('/api/plazos-fijos');
@@ -85,6 +88,19 @@ export default function Home() {
       setPutResult(data);
     } catch (error) {
       setPutResult({ error: String(error) });
+    }
+  };
+
+  const handleDeletePlazo = async () => {
+    if (!deletePlazoId) return;
+    try {
+      const res = await fetch(`/api/plazos-fijos/${deletePlazoId}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      setDeleteResult(data);
+    } catch (error) {
+      setDeleteResult({ error: String(error) });
     }
   };
 
@@ -143,6 +159,15 @@ export default function Home() {
             </div>
           </div>
           {putResult && <CardWithCode data={putResult} />}
+        </section>
+        <section className="mt-4">
+          <Label className="text-md">DELETE /api/plazos-fijos/{"{"}id{"}"}</Label>
+          <p>Elimina un plazo fijo por su ID.</p>
+          <div className="flex flex-row gap-4 items-center">
+            <EditableLabel placeholder="ID a eliminar" onChange={setDeletePlazoId} />
+            <Button onClick={handleDeletePlazo}>Probar DELETE</Button>
+          </div>
+          {deleteResult && <CardWithCode data={deleteResult} />}
         </section>
       </main>
     </>

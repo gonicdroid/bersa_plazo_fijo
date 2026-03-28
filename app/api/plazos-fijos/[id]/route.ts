@@ -67,8 +67,9 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
       throw new ValidationError('El ID ingresado no es válido');
     }
     const result = await deletePlazoFijo(idPlazoFijo);
+    console.log(result)
     if(!result) {
-      throw new Error('No se pudo eliminar el plazo fijo');
+      return NextResponse.json({ message: "No se encontró el plazo fijo" }, { status: 404 });
     } else {
       return NextResponse.json({ message: "Plazo fijo eliminado exitosamente" }, { status: 200 });
     }
