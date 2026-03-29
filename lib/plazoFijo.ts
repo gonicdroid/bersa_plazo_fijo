@@ -7,7 +7,7 @@ export async function getPlazosFijos(id?: number){
   try{
     let sql = `
       SELECT p.id, p.monto, p.tasaAnual, p.fechaInicio, 
-      p.fechaVencimiento, c.idCuenta, m.tipoMoneda, e.nombreEstado 
+      p.fechaVencimiento, c.idCuenta, c.numeroCuenta, m.tipoMoneda, e.nombreEstado 
       FROM plazosFijos p 
       INNER JOIN cuentas c ON p.idCuenta = c.idCuenta
       INNER JOIN monedas m ON c.idMoneda = m.idMoneda
@@ -15,7 +15,7 @@ export async function getPlazosFijos(id?: number){
       `;
     let rows;
     if(id){
-      sql += "WHERE p.id = ?";
+      sql += " WHERE p.id = ?";
       rows = await query(sql, [id]);
       if(rows.length === 0) { return null; }
       return formatGetPlazoFijo(rows[0]);
@@ -26,7 +26,6 @@ export async function getPlazosFijos(id?: number){
     }
 
   }catch (err) {
-    console.log(err);
     throw err;
   }
 }
@@ -43,7 +42,7 @@ function formatGetPlazoFijo(data: plazoFijoDBQuery){
 
   return {
     "id": data.id,
-    "numeroCuenta": data.idCuenta,
+    "numeroCuenta": data.numeroCuenta,
     "tipoMoneda": data.tipoMoneda,
     "monto": data.monto,
     "tasaAnual": data.tasaAnual,
@@ -59,7 +58,7 @@ function formatGetPlazoFijo(data: plazoFijoDBQuery){
 export async function addPlazoFijo(data: addPlazoFijoDTO) : Promise<{status: boolean, id: number}>{
   try{
     // Validaciones
-    if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
+    if (data.monto < 1) throw new ValidationError("El monto debe ser mayor a cero");
     if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);
@@ -75,7 +74,6 @@ export async function addPlazoFijo(data: addPlazoFijoDTO) : Promise<{status: boo
     };
     return {status: true, id: Number(rows.insertId)}; 
   }catch (err) {
-    console.log(err);
     throw err;
   }
 }
@@ -84,7 +82,7 @@ export async function updatePlazoFijo(id: number, data: addPlazoFijoDTO): Promis
   // Requiere el objeto completo, siguiendo convención API REST (método PUT)
   try {
     // Validaciones
-    if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
+    if (data.monto < 1) throw new ValidationError("El monto debe ser mayor a cero");
     if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);
@@ -101,7 +99,6 @@ export async function updatePlazoFijo(id: number, data: addPlazoFijoDTO): Promis
     }
     return true;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 }
@@ -111,7 +108,6 @@ export async function deletePlazoFijo(id: number): Promise<boolean> {
     const result = await query("DELETE FROM plazosFijos WHERE id = ?", [id]);
     return result.affectedRows > 0;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 }
@@ -157,7 +153,6 @@ async function validarCuenta(numeroCuenta: string, idMoneda: number){
     }
     return idCuentaFinal;
   }catch (err) {
-    console.log(err);
     throw err;
   }
 }

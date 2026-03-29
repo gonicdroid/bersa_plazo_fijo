@@ -33,19 +33,21 @@ Se aplican ciertas restricciones sobre los datos, estas son:
 
 La pantalla principal actúa como un cliente HTTP integrado. Encontrará secciones divididas por cada operación disponible en la [API](./3-DOCUMENTACION_API.md)
 
+Puede utilizar otras aplicaciones, como Postman, para realizar peticiones de prueba. 
+
 ### 1. Obtener Plazos Fijos (GET)
 Implementa la petición `HTTP GET /api/plazos-fijos`. Se obtendrá como respuesta el listado de los plazos fijos en el caso que se encuentren registros ingresados, con sus correspondientes datos.
 Para utilizar esta funcionalidad, presione el botón "Probar" de color rojo.
 
 ![Interfaz de Endpoints disponibles, donde se muestra el primer endpoint para obtener todos los plazos fijos mediante el botón probar](./assets/get_plazos_fijos.png)
 
-La respuesta esperada de este endpoint se especifica en la [documentación de la API](./3-DOCUMENTACION_API.md#get-api-plazos-fijos). Se mostrará el JSON del resultado de la consulta en un recuadro justo debajo del botón:
+La respuesta esperada de este endpoint se especifica en la [documentación de la API](./3-DOCUMENTACION_API.md#1-obtener-todos-los-plazos-fijos). Se mostrará el JSON del resultado de la consulta en un recuadro justo debajo del botón:
 
 ![Ejemplo de obtención exitosa de los Plazos Fijos ingresados](./assets/get_plazos_fijos_example.png)
 
 ### 2. Obtener Plazo Fijo por ID (GET)
 Implementa la petición `HTTP GET /api/plazos-fijos/{id}`. Se obtendrá como respuesta el listado de los plazos fijos en el caso que se encuentren registros ingresados, con sus correspondientes datos.
-Para utilizar esta funcionalidad, ingrese en el campo de texto el id numérico del registro que desea consultar, y presione el botón "Probar" de color rojo. Se mostrará la [respuesta](./3-DOCUMENTACION_API.md#get-api-plazos-fijos) en un recuadro siguiente al botón.
+Para utilizar esta funcionalidad, ingrese en el campo de texto el id numérico del registro que desea consultar, y presione el botón "Probar" de color rojo. Se mostrará la [respuesta](./3-DOCUMENTACION_API.md#2-obtener-plazo-fijo-por-id) en un recuadro siguiente al botón.
 
 ![Sección donde se muestra la interfaz para ingresar el ID de un plazo fijo y el botón "Probar" que hace la petición](./assets/get_plazo_fijo_id.png)
 
@@ -61,12 +63,12 @@ En la sección `POST`, el sistema le provee una plantilla JSON por defecto en el
   "fechaVencimiento": ""
 }
 ```
-Debe rellenar cada uno de los campos con los datos pertinentes, cumpliendo con lo requerido por la [API](./3-DOCUMENTACION_1#get-api-plazos-fijos). Recuerde que debe utilizar comillas dobles para cada dato.
-Una vez ingresado los datos, el botón "Probar Post" ejecutará la petición, y en el recuadro inferior, aparecerá el mensaje JSON de respuesta:
+Debe rellenar cada uno de los campos con los datos pertinentes, cumpliendo con lo requerido por la [API](./3-DOCUMENTACION_API.md#3-crear-un-plazo-fijo). Recuerde que debe utilizar comillas dobles para cada dato.
+Una vez ingresados los datos, el botón "Probar Post" ejecutará la petición, y en el recuadro inferior, aparecerá el mensaje JSON de respuesta:
 ![Sección donde se muestra la interfaz para realizar la petición de tipo POST, para enviar información a la API con el botón "Probar POST" que realiza la acción](./assets/post_plazo_fijo.png)
 
 ### 4. Modificación de un plazo fijo (PUT)
-Esta sección actúa de forma similar a POST, donde la interfaz presenta un formato por defecto de [petición](./3-DOCUMENTACION_API.md#get-api-plazos-fijos) donde se rellenan los datos, añadiendo una entrada de texto donde se debe ingresar el ID del plazo fijo a modificar.
+Esta sección actúa de forma similar a POST, donde la interfaz presenta un formato por defecto de [petición](./3-DOCUMENTACION_API.md#4-actualizar-un-plazo-fijo) donde se rellenan los datos y se añade una entrada de texto donde se debe ingresar el ID del plazo fijo a modificar.
 ```json
 {
   "numeroCuenta": "",

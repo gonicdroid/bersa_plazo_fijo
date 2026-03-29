@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
     }
     return NextResponse.json(rows);
   } catch (err: any) {
-    console.error(err);
     return NextResponse.json({ error: "Lo sentimos, ha ocurrido un error." }, { status: 500 });
   }  
 }
@@ -40,7 +39,6 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({ message: "Plazo fijo creado exitosamente", id: result.id }, { status: 201 });
   } catch (error: any) {
-    console.error(error);
     if(error instanceof ValidationError) {
       return NextResponse.json({error: error.message }, { status: 400 });
     }

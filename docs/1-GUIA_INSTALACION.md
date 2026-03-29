@@ -18,7 +18,7 @@ El proyecto está completamente contenerizado mediante el uso de Docker, garanti
    docker compose up -d --build
    ```
    *Nota: la primera ejecución tardará varios minutos, ya que Docker construye la imagen de la aplicación, crea la base de datos y ejecuta los scripts para crear las tablas relacionales e insertar los datos maestros (monedas, estados).*
-4. **Opcional: verificar los logs.** Puede verificar que todo salió correctamente verificando el estado de los servicios:
+4. **Opcional: verificar los logs.** Puede comprobar que todo salió correctamente verificando el estado de los servicios:
    ```bash
    docker compose logs -f
    ```

@@ -27,7 +27,6 @@ export async function query(sql: string, params?: any[]) {
     const res = await conn.query(sql, params);
     return res;
   } catch (err) {
-    console.log(err)
     throw err;
   } finally {
     if (conn) conn.release();

@@ -20,7 +20,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     }
     return NextResponse.json(rows);
   } catch (err: any) {
-    console.error(err);
     if(err instanceof ValidationError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }else{
@@ -34,13 +33,13 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     const resolvedParams = await params;
     const idPlazoFijo = parseInt(resolvedParams.id);
     if (!idPlazoFijo || isNaN(idPlazoFijo)) {
-      throw new ValidationError('El ID ingresado no es válido');
+      throw new ValidationError('El ID ingresado no es válido.');
     }
 
     const body: addPlazoFijoDTO = await req.json();
 
     if (!body.numeroCuenta || !body.tipoMoneda || body.monto === undefined || body.tasaAnual === undefined || !body.fechaInicio || !body.fechaVencimiento || !body.estado) {
-      throw new ValidationError("Faltan campos obligatorios para actualizar el plazo fijo");
+      throw new ValidationError("Faltan campos obligatorios para actualizar el plazo fijo.");
     }
 
     const result = await updatePlazoFijo(idPlazoFijo, body);
@@ -48,13 +47,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       throw new Error('No se pudo actualizar el plazo fijo');
     }
 
-    return NextResponse.json({ message: "Plazo fijo actualizado exitosamente" }, {status: 200});
+    return NextResponse.json({ message: "Plazo fijo actualizado exitosamente." }, {status: 200});
   } catch (err: any) {
-    console.error(err);
     if(err instanceof ValidationError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     } else {
-      return NextResponse.json({ error: "Lo sentimos, ha ocurrido un error." }, { status: 500 });
+      return NextResponse.json({ error: "No se pudo actualizar el plazo fijo." }, { status: 500 });
     }
   }
 }
@@ -67,14 +65,12 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
       throw new ValidationError('El ID ingresado no es válido');
     }
     const result = await deletePlazoFijo(idPlazoFijo);
-    console.log(result)
     if(!result) {
       return NextResponse.json({ message: "No se encontró el plazo fijo" }, { status: 404 });
     } else {
-      return NextResponse.json({ message: "Plazo fijo eliminado exitosamente" }, { status: 200 });
+      return NextResponse.json({ message: "Plazo fijo eliminado exitosamente." }, { status: 200 });
     }
   } catch (err: any) {
-    console.error(err);
     if(err instanceof ValidationError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }else{
