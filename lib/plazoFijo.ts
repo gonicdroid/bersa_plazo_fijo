@@ -58,8 +58,11 @@ function formatGetPlazoFijo(data: plazoFijoDBQuery){
 export async function addPlazoFijo(data: addPlazoFijoDTO) : Promise<{status: boolean, id: number}>{
   try{
     // Validaciones
+    data.monto = Math.ceil(Number(data.monto) * 100) / 100;
+    data.tasaAnual = Math.ceil(Number(data.tasaAnual) * 100) / 100;
+
     if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
-    if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
+    if (data.tasaAnual < 1 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);
     const idMoneda = await validarMoneda(data.tipoMoneda);
@@ -82,8 +85,11 @@ export async function updatePlazoFijo(id: number, data: addPlazoFijoDTO): Promis
   // Requiere el objeto completo, siguiendo convención API REST (método PUT)
   try {
     // Validaciones
+    data.monto = Math.ceil(Number(data.monto) * 100) / 100;
+    data.tasaAnual = Math.ceil(Number(data.tasaAnual) * 100) / 100;
+
     if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
-    if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
+    if (data.tasaAnual < 1 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);
     const idMoneda = await validarMoneda(data.tipoMoneda);

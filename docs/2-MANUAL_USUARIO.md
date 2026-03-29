@@ -27,6 +27,7 @@ Se aplican ciertas restricciones sobre los datos, estas son:
 * La tasa anual debe encontrarse entre el 1% y el 200%, ambos extremos inclusive.
 * La fecha de vencimiento debe ser posterior a la fecha de inicio del plazo fijo, y no puede exceder los 365 días.
 * El estado por defecto al ingresar un plazo fijo es "ACTIVO". Puede modificarse luego de ingresado por los siguientes valores: VENCIDO, CANCELADO, RENOVADO.
+* Todos los valores numéricos serán redondeados siempre hacia arriba por la API, en caso de contar con más de dos decimales.
 
 
 ## Uso del panel de interacción (Frontend)

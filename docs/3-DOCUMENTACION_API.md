@@ -7,7 +7,7 @@ Esta interfaz proporciona acceso programático para la gestión integral de plaz
 * El **Formato de intercambio** utilizado es: `application/json`
 * **Autenticación:** no requerida.
 
-## Glosario de errores comunes
+## Glosario de códigos HTTP utilizados
 
 Se utiliza los códigos de estado HTTP estándar para indicar el éxito o fracaso de las peticiones enviadas a la API, [como se especifica en la RFC-9205](https://www.rfc-editor.org/rfc/rfc9205.html#name-using-http-status-codes). 
 Se detalla a continuación el set utilizado:
@@ -21,7 +21,7 @@ Se detalla a continuación el set utilizado:
 
 Las respuestas correctas a peticiones GET desde la API devuelven directamente el `objeto` solicitado, o bien un `array de objetos` en caso de ser más de uno, obteniendo el código HTTP 200.
 
-En los casos donde la petición sea de tipo POST o PUT y se devuelva una respuesta exitosa (códigos HTTP 200 o 201), se obtendrá un objeto con la entrada `message` indicando un mensaje informativo, y si se ha creado un objeto, también el campo `id` del mismo.
+En los casos donde la petición sea de tipo POST o PUT y se devuelva una respuesta exitosa (códigos HTTP 200 o 201), se obtendrá un objeto con la entrada `"message"` indicando un mensaje informativo, y si se ha creado un objeto, también el campo `"id"` del mismo.
 
 Si se ha producido un error general, se devuelve el objeto con la entrada `"error"`, el cual otorga más detalles sobre lo ocurrido, con su respectivo código de error HTTP 500.
 
