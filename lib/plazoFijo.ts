@@ -58,7 +58,7 @@ function formatGetPlazoFijo(data: plazoFijoDBQuery){
 export async function addPlazoFijo(data: addPlazoFijoDTO) : Promise<{status: boolean, id: number}>{
   try{
     // Validaciones
-    if (data.monto < 1) throw new ValidationError("El monto debe ser mayor a cero");
+    if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
     if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);
@@ -82,7 +82,7 @@ export async function updatePlazoFijo(id: number, data: addPlazoFijoDTO): Promis
   // Requiere el objeto completo, siguiendo convención API REST (método PUT)
   try {
     // Validaciones
-    if (data.monto < 1) throw new ValidationError("El monto debe ser mayor a cero");
+    if (data.monto <= 0) throw new ValidationError("El monto debe ser mayor a cero");
     if (data.tasaAnual <= 0 || data.tasaAnual > 200) throw new ValidationError("La tasa anual debe ser un valor entre 1 y 200, ambos inclusive.");
     calcularPlazoDias(data.fechaInicio, data.fechaVencimiento);
     const idEstado = await validarEstado(data.estado);

@@ -14,9 +14,9 @@ El sistema permite la creación de plazos fijos y su posterior manipulación y o
 * **Número de cuenta**: identificador de la cuenta bancaria del usuario o entidad que está realizando el plazo fijo. 
 * **Tipo de moneda**: el código de la divisa escrito en estándar ISO 4217. Por defecto, se aceptan únicamente Pesos Argentinos (ARS) y Dólares Estadounidenses (USD)
 * **Monto**: el total de dinero que se deposita en plazo fijo.
-* **Tasa Anual**: el porcentaje que se ha ofrecido de interés sobre el capital.
-* **Fecha de inicio**: el día en que se realiza el plazo fijo, y desde el cual se comienza a computar el interés.
-* **Fecha de vencimiento**: el día en que el plazo fijo vence.
+* **Tasa Anual**: el porcentaje que se ha ofrecido de interés sobre el capital. Se ingresa únicamente el número, sin el porcentaje.
+* **Fecha de inicio**: el día en que se realiza el plazo fijo, y desde el cual se comienza a computar el interés. El formato de ingreso de la fecha es "YYYY-MM-DD", es decir, año-mes-día.
+* **Fecha de vencimiento**: el día en que el plazo fijo vence. El formato de ingreso es igual al de la fecha de inicio.
 
 Estos datos se deben brindar a la API en un formato JSON específico. Véase [documentación de la API](./3-DOCUMENTACION_API.md).
 
@@ -65,6 +65,7 @@ En la sección `POST`, el sistema le provee una plantilla JSON por defecto en el
 ```
 Debe rellenar cada uno de los campos con los datos pertinentes, cumpliendo con lo requerido por la [API](./3-DOCUMENTACION_API.md#3-crear-un-plazo-fijo). Recuerde que debe utilizar comillas dobles para cada dato.
 Una vez ingresados los datos, el botón "Probar Post" ejecutará la petición, y en el recuadro inferior, aparecerá el mensaje JSON de respuesta:
+
 ![Sección donde se muestra la interfaz para realizar la petición de tipo POST, para enviar información a la API con el botón "Probar POST" que realiza la acción](./assets/post_plazo_fijo.png)
 
 ### 4. Modificación de un plazo fijo (PUT)
@@ -82,8 +83,10 @@ Esta sección actúa de forma similar a POST, donde la interfaz presenta un form
 ```
 Se debe ingresar todos los datos del Plazo Fijo, que pueden obtenerse desde el GET, y posteriormente realizar la modificación pertinente a los datos. 
 Una vez ejecutada la petición, aparece un cuadro con la respuesta en JSON devuelta por la API.
+
 ![Sección donde se muestra la interfaz de entrada del ID del plazo fijo, y el payload en JSON, para realizar la petición de tipo PUT, para enviar información a la API con el botón "Probar PUT" que realiza la acción](./assets/put_plazo_fijo_id.png)
 
 ### 5. Eliminación de un plazo fijo (DELETE)
 En esta sección, el sistema presenta una entrada de texto donde debe ingresar el ID del plazo fijo que desea eliminar. Posteriormente, presionando el botón "Probar DELETE", se envía la petición a la API, apareciendo debajo un recuadro con la respuesta en formato JSON que devuelve esta.
+
 ![Sección donde se muestra la interfaz de entrada del ID del plazo fijo para enviar la solicitud DELETE](./assets/delete_plazo_fijo_id.png)
